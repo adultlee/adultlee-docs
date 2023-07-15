@@ -1,5 +1,6 @@
 {
 	"index": "Introduction",
+	"display": "DISPLAY",
 	"about": {
 		"title": "About",
 		"type": "page"
