@@ -1,80 +1,86 @@
-# Jest 란
+# jest란?
 
-Jest는 자바스크립트와 리액트 애플리케이션을 테스트하기 위한 강력하고 사용하기 쉬운 테스팅 프레임워크입니다. Jest는 Facebook에서 개발되었으며, 단위 테스트, 통합 테스트, 스냅샷 테스트 등 다양한 테스트 유형을 지원하여 코드의 품질과 안정성을 보장하는 데에 도움이 됩니다. 이제 Jest의 주요 기능과 사용 방법에 대해 설명하겠습니다.
+Jest는 JavaScript와 TypeScript 애플리케이션을 테스트하기 위한 인기 있는 테스트 프레임워크입니다. Jest의 사용법을 간단히 설명해드리겠습니다.
 
-## Jest의 주요 기능
+### 1. Jest 설치
 
-1. 간편한 설정: Jest는 기본 설정으로 작동하기 때문에 별도의 설정 없이 바로 사용할 수 있습니다. 하지만 사용자의 요구에 맞게 커스터마이징할 수도 있습니다.
+Jest를 사용하기 위해서는 먼저 프로젝트에 Jest를 설치해야 합니다. npm 또는 yarn을 사용하여 설치할 수 있습니다.
 
-2. 자동 Mocking: Jest는 모듈 간의 의존성을 자동으로 모의(mocking)하여 테스트를 단순화하고 테스트 실행 속도를 높입니다.
+```bash
+npm install jest --save-dev
+```
 
-3. 풍부한 Matchers: Jest는 다양한 Matchers를 제공하여 기대 결과와 실제 결과를 쉽게 비교할 수 있습니다. 예를 들어, .toBe(), .toEqual(), .toContain() 등의 Matchers가 있습니다.
+또는
 
-4. 비동기 테스트 지원: Jest는 비동기 코드를 테스트하기 위해 async/await나 Promise를 쉽게 처리할 수 있습니다.
+```bash
+yarn add jest --dev
+```
 
-5. Code Coverage 지원: Jest는 코드 커버리지를 측정하여 얼마나 많은 코드가 테스트되었는지 확인할 수 있습니다.
+### 2. 테스트 파일 작성
 
-6. 스냅샷 테스트: Jest는 컴포넌트의 출력 결과나 JSON 데이터와 같이 변하는 결과에 대한 스냅샷 테스트를 지원합니다.
-
-## Jest 사용 예제
-
-### 설치 및 기본 설정
-
-Jest를 사용하기 위해 먼저 프로젝트에 Jest를 설치해야 합니다. npm을 사용하는 경우 다음 명령어를 실행합니다:
-
-> npm install jest --save-dev
-> Jest를 설치한 뒤에는 package.json에 "jest": {}를 추가하여 기본 설정을 정의할 수 있습니다.
-
-### 간단한 테스트 작성
-
-Jest를 사용하여 간단한 함수를 테스트하는 예제입니다. 다음은 sum.js 파일에 있는 두 숫자를 더하는 함수를 테스트하는 코드입니다.
-
-javascript
+Jest를 사용하여 테스트를 작성할 때, 테스트 파일은 일반적으로
+.test.js 또는 .spec.js 확장자를 가지도록 작성하는 것이 일반적입니다.  
+예를 들어,  
+myFunction.js를 테스트하는 파일은 myFunction.test.js와 같이 작성합니다. 테스트 파일에서는 테스트할 코드의 함수 또는 모듈을 불러오고, 테스트 케이스를 작성합니다.
 
 ```js
-// sum.js
-function sum(a, b) {
+// myFunction.js (테스트 대상 모듈)
+function add(a, b) {
 	return a + b;
 }
-```
 
-module.exports = sum;
+// myFunction.test.js (테스트 파일)
+const { add } = require("./myFunction");
 
-```js
-// sum.test.js
-const sum = require("./sum");
-
-test("adds 1 + 2 to equal 3", () => {
-	expect(sum(1, 2)).toBe(3);
+test("덧셈 함수 테스트", () => {
+	expect(add(2, 3)).toBe(5);
 });
 ```
 
-### 비동기 코드 테스트
+### 3. 테스트 실행
 
-비동기 함수를 테스트하는 예제입니다. 다음은 fetchData.js 파일에 비동기 함수를 정의하고, 해당 함수를 테스트하는 코드입니다.
+테스트를 실행하기 위해서는 터미널에서 다음 명령을 실행합니다.
 
-```js
-// fetchData.js
-function fetchData() {
-	return new Promise((resolve, reject) => {
-		setTimeout(() => {
-			resolve("Data fetched successfully!");
-		}, 1000);
-	});
+`npx jest`
+
+또는, package.json 파일의 scripts 섹션에 Jest 실행 명령을 추가하여 테스트를 실행할 수도 있습니다.
+
+```json
+// package.json
+{
+	"scripts": {
+		"test": "jest"
+	}
 }
-
-module.exports = fetchData;
 ```
 
-```js
-// fetchData.test.js
-const fetchData = require("./fetchData");
+그리고 다음 명령으로도 실행 가능합니다.
 
-test("fetchData returns correct data", async () => {
-	const data = await fetchData();
-	expect(data).toBe("Data fetched successfully!");
-});
+```bash
+npm test
 ```
 
-결론
-Jest는 강력하고 사용하기 쉬운 자바스크립트 테스팅 프레임워크로, 단위 테스트와 통합 테스트를 효과적으로 수행하며 코드의 안정성과 신뢰성을 높이는 데에 도움이 됩니다. Jest의 간편한 설정, 자동 Mocking, Matchers, 비동기 테스트 지원 등의 다양한 기능은 개발자들이
+Jest는 테스트 파일을 자동으로 탐지하고 실행하여 결과를 보여줍니다.
+
+### 4. 기본적인 Matcher
+
+Jest에서 테스트 결과를 판별하기 위해 사용되는 Matcher 함수들이 있습니다. 흔히 사용되는 Matcher 함수들은 다음과 같습니다.
+
+- expect(value).toBe(expected): value가 expected와 정확히 일치하는지 확인합니다.
+- expect(value).toEqual(expected): 객체나 배열 등 value가 expected와 동일한지 확인합니다.
+- expect(value).toBeTruthy(): value가 truthy한 값인지 확인합니다.
+- expect(value).toBeFalsy(): value가 falsy한 값인지 확인합니다.
+- expect(value).toBeNull(): value가 null인지 확인합니다.
+- expect(value).toBeDefined(): value가 정의되어 있는지 확인합니다.
+- expect(value).toBeUndefined(): value가 undefined인지 확인합니다.
+- expect(value).toContain(item): 배열이나 문자열에 item이 포함되어 있는지 확인합니다.
+- expect(value).toHaveLength(length): 배열 또는 문자열의 길이가 length와 일치하는지 확인합니다.
+- expect(value).toHaveProperty(propertyName): 객체가 propertyName을 가지고 있는지 확인합니다.
+
+  이 외에도 Jest는 다양한 Matcher 함수들을 지원하므로, 프로젝트에 맞게 적절한 Matcher를 사용할 수 있습니다.
+
+### 5. Snapshot 테스트
+
+Jest는 스냅샷(Snapshot) 기능을 제공하여, 테스트 결과를 기록하고 이후 변경 사항을 검사하는 방식으로 테스트를 수행할 수 있습니다. 스냅샷 테스트를 활용하여 컴포넌트 렌더링 결과, JSON 데이터 등의 변화를 간단하게 확인할 수 있습니다.
+
+하지만 정확한 이해가 되지 않아 테스팅 방법에 대해서 다시 한번 정리를 해보겠습니다.
