@@ -4,6 +4,30 @@
 하지만 async/await 문법은 Promise를 기반으로 하면서 비동기적인 작업을 보다 동기적으로 처리하기 위해서 ES2017에 도입된 문법입니다. async 함수 내부에서 await 키워드를 사용해서 비동기 작업이 완료될때까지 기다린 후 결과를 받아올 수 있습니다. 이를 통해서 비동기 처리를 좀더 직관적이고 동기적인 구조로 작성할 수 있습니다.
 
 ```js
+function fetchData() {
+	return new Promise((resolve, reject) => {
+		// 비동기 작업 수행
+		setTimeout(() => {
+			const data = "Some data fetched from the server";
+			// 성공적으로 처리되면 resolve를 호출하여 결과값 전달
+			resolve(data);
+			// 에러 발생 시 reject를 호출하여 에러 전달
+			// reject(new Error('Error fetching data'));
+		}, 1000);
+	});
+}
+
+// Promise 사용
+fetchData()
+	.then((result) => {
+		console.log(result);
+	})
+	.catch((error) => {
+		console.error(error);
+	});
+```
+
+```js
 // 예시: async/await를 사용한 비동기 작업
 async function fetchData() {
 	// 비동기 작업 수행
