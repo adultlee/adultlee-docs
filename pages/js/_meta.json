@@ -1,3 +1,10 @@
 {
-	"regex-name-tag": "정규표현식 그룹 이름 지정구문"
+	"regex-name-tag": "정규표현식 그룹 이름 지정구문",
+	"enum": "자바스크립트에서 구현한 Enum",
+	"promise0async-await": "promise VS async-await",
+	"readline-clear": "Readline에서 clear구현",
+	"readLine": "Readline을 통한 중복 입력방식",
+	"spread": "Spread 연산자의 활용법",
+	"worker": "worker 스레드에 대하여",
+	"callbackhell": "콜백 지옥(callback hell)이란"
 }
